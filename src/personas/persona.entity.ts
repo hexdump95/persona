@@ -1,7 +1,7 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity()
-export class Persona extends BaseEntity {
+export class Persona {
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -16,7 +16,6 @@ export class Persona extends BaseEntity {
     dni: number;
 
     constructor(nombre: string, apellido: string, dni: number) {
-        super();
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
