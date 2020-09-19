@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { PersonaModule } from './personas/persona.module'
+import { PersonasModule } from './personas/personas.module'
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
-    PersonaModule,
+    PersonasModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',

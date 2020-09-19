@@ -1,10 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { RootEntity } from "../generics/root.entity";
+import { Entity, Column } from "typeorm";
 
 @Entity()
-export class Persona {
-
-    @PrimaryGeneratedColumn()
-    id: number;
+export class Persona extends RootEntity {
 
     @Column()
     nombre: string;
@@ -14,11 +12,5 @@ export class Persona {
 
     @Column({ unique: true })
     dni: number;
-
-    constructor(nombre: string, apellido: string, dni: number) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.dni = dni;
-    }
 
 }
