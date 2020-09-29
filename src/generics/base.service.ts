@@ -5,9 +5,9 @@ import { Repository } from "typeorm";
 export class BaseService<Entity, CreateDto, UpdateDto> {
 
     constructor(private repository: Repository<Entity>) { }
-    
+
     async findAll(): Promise<Entity[]> {
-        const entities = this.repository.find();
+        const entities = await this.repository.find();
         if (entities) return entities;
         else throw new HttpException({ error: 'Error, por favor intente más tarde.' }, HttpStatus.NOT_FOUND);
     }

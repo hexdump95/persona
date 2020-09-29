@@ -1,15 +1,38 @@
-import { Controller } from "@nestjs/common";
-import { BaseController } from "../generics/base.controller";
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { CreatePersonaDto } from "./dto/create-persona.dto";
 import { UpdatePersonaDto } from "./dto/update-persona.dto";
 import { Persona } from "./persona.entity";
 import { PersonasService } from "./personas.service";
 
 @Controller('api/v1/personas')
-export class PersonasController extends BaseController<Persona, CreatePersonaDto, UpdatePersonaDto> {
+export class PersonasController {
 
-  constructor(private personasService: PersonasService<Persona>) {
-    super(personasService);
+  constructor(private readonly personasService: PersonasService<Persona>) {
+  }
+
+  @Get('')
+  getAll(): Promise<Persona[]> {
+    return this.personasService.findAll();
+  }
+
+  @Get(':id')
+  getOne(@Param('id') id: number): Promise<Persona> {
+    return this.personasService.findById(id);
+  }
+
+  @Post('')
+  save(@Body() dto: CreatePersonaDto): Promise<Persona> {
+    return this.personasService.create(dto);
+  }
+
+  @Put(':id')
+  update(@Param('id') id: number, @Body() dto: UpdatePersonaDto): Promise<Persona> {
+    return this.personasService.update(id, dto);
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: number): Promise<boolean> {
+    return this.personasService.remove(id);
   }
 
 }

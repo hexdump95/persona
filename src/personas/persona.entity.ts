@@ -1,16 +1,25 @@
-import { RootEntity } from "../generics/root.entity";
-import { Entity, Column } from "typeorm";
+import { Base } from "../generics/base.entity";
+import { Entity, Column, JoinColumn, OneToOne, OneToMany } from "typeorm";
+import { Domicilio } from "../domicilios/domicilio.entity";
+import { Libro } from "../libros/libro.entity";
 
 @Entity()
-export class Persona extends RootEntity {
+export class Persona extends Base {
 
-    @Column()
-    nombre: string;
+  @Column()
+  nombre: string;
 
-    @Column()
-    apellido: string;
+  @Column()
+  apellido: string;
 
-    @Column({ unique: true })
-    dni: number;
+  @Column({ unique: true })
+  dni: number;
+
+  @OneToOne(() => Domicilio, { cascade: true })
+  @JoinColumn({ name: 'fk_domicilio' })
+  domicilio: Domicilio;
+
+  @OneToMany(type => Libro, libro => libro.persona, { cascade: ["remove", "update", "insert"] })
+  libros: Libro[];
 
 }
