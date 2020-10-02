@@ -15,11 +15,11 @@ export class Persona extends Base {
   @Column({ unique: true })
   dni: number;
 
-  @OneToOne(() => Domicilio, { cascade: true })
+  @OneToOne(() => Domicilio, { cascade: true, eager: true })
   @JoinColumn({ name: 'fk_domicilio' })
   domicilio: Domicilio;
 
-  @OneToMany(type => Libro, libro => libro.persona, { cascade: ["remove", "update", "insert"] })
+  @OneToMany(type => Libro, libro => libro.persona, { cascade: ["remove", "update", "insert"], eager: true })
   libros: Libro[];
 
 }

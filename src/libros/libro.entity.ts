@@ -18,7 +18,7 @@ export class Libro extends Base {
     @Column()
     titulo: string;
 
-    @ManyToMany(type => Autor, { cascade: ["update", "insert"] })
+    @ManyToMany(type => Autor, { cascade: ["update", "insert"], eager: true })
     @JoinTable({
         name: "libro_autor",
         joinColumn: {

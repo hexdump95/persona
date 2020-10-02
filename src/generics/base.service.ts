@@ -1,10 +1,10 @@
 import { HttpException, HttpStatus } from "@nestjs/common";
 import { classToClass } from "class-transformer";
-import { Repository } from "typeorm";
+import { BaseRepository } from "./base.repository";
 
 export class BaseService<Entity, CreateDto, UpdateDto> {
 
-    constructor(private repository: Repository<Entity>) { }
+    constructor(private readonly repository: BaseRepository<Entity>) { }
 
     async findAll(): Promise<Entity[]> {
         const entities = await this.repository.find();

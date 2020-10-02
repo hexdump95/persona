@@ -11,7 +11,7 @@ export class Domicilio extends Base {
     @Column()
     numero: number;
 
-    @ManyToOne(type => Localidad, { nullable: false })
+    @ManyToOne(type => Localidad, { nullable: false, eager: true })
     @JoinColumn({ name: "fk_localidad" })
     localidad: Localidad;
 

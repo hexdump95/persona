@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from "@nestjs/common";
 import { CreatePersonaDto } from "./dto/create-persona.dto";
 import { UpdatePersonaDto } from "./dto/update-persona.dto";
 import { Persona } from "./persona.entity";
@@ -8,6 +8,11 @@ import { PersonasService } from "./personas.service";
 export class PersonasController {
 
   constructor(private readonly personasService: PersonasService<Persona>) {
+  }
+
+  @Get('/search')
+  async search(@Query('filtro') filtro: string): Promise<Persona[]> {
+    return await this.personasService.search(filtro);
   }
 
   @Get('')
@@ -34,5 +39,5 @@ export class PersonasController {
   delete(@Param('id') id: number): Promise<boolean> {
     return this.personasService.remove(id);
   }
-
+  
 }
