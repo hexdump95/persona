@@ -1,6 +1,6 @@
-import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Localidad } from './localidad.entity';
+import { Module } from '@nestjs/common';
+import { Localidad } from './entities/localidad.entity';
 import { LocalidadesController } from './localidades.controller';
 import { LocalidadesService } from './localidades.service';
 

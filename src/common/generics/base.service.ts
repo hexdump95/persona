@@ -1,3 +1,4 @@
+import { PaginationQueryDto } from '../dto/pagination-query.dto';
 import { HttpException, HttpStatus } from "@nestjs/common";
 import { classToClass } from "class-transformer";
 import { BaseRepository } from "./base.repository";
@@ -6,13 +7,18 @@ export class BaseService<Entity, CreateDto, UpdateDto> {
 
     constructor(private readonly repository: BaseRepository<Entity>) { }
 
-    async findAll(): Promise<Entity[]> {
-        const entities = await this.repository.find();
-        if (entities) return entities;
-        else throw new HttpException({ error: 'Error, por favor intente más tarde.' }, HttpStatus.NOT_FOUND);
+    async findAll(paginationQuery: PaginationQueryDto): Promise<Entity[]> {
+        const { limit, offset } = paginationQuery;
+        try {
+            return await this.repository.find({ skip: offset, take: limit });
+        }
+        catch (err) {
+            console.log(err.code);
+            throw new HttpException({ error: 'Error, por favor intente más tarde.' }, HttpStatus.NOT_FOUND);
+        }
     }
 
-    async findById(id: number): Promise<Entity> {
+    async findOne(id: number): Promise<Entity> {
         const entity = await this.repository.findOne(id);
         if (entity) return entity;
         else throw new HttpException({ error: 'Error, por favor intente más tarde.' }, HttpStatus.NOT_FOUND);

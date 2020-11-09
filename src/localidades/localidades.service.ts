@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { BaseService } from 'src/generics/base.service';
+import { BaseService } from '../common/generics/base.service';
 import { Repository } from 'typeorm';
 import { CreateLocalidadDto } from './dto/create-localidad.dto';
 import { UpdateLocalidadDto } from './dto/update-localidad.dto';
-import { Localidad } from './localidad.entity';
+import { Localidad } from './entities/localidad.entity';
 
 @Injectable()
 export class LocalidadesService<Localidad> extends BaseService<Localidad, CreateLocalidadDto, UpdateLocalidadDto> {

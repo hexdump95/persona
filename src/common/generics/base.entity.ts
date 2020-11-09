@@ -4,4 +4,5 @@ export abstract class Base {
 
     @PrimaryGeneratedColumn()
     id: number;
+    
 }

@@ -1,5 +1,5 @@
-import { Column, Entity } from "typeorm";
-import { Base } from "../generics/base.entity";
+import { Column, Entity } from 'typeorm';
+import { Base } from "../../common/generics/base.entity";
 
 @Entity()
 export class Autor extends Base {

@@ -1,6 +1,6 @@
-import { BaseRepository } from "../generics/base.repository";
+import { BaseRepository } from "../common/generics/base.repository";
 import { EntityRepository } from "typeorm";
-import { Persona } from './persona.entity'
+import { Persona } from './entities/persona.entity'
 import { HttpException, HttpStatus } from "@nestjs/common";
 
 @EntityRepository(Persona)

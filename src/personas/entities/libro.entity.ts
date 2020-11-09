@@ -1,7 +1,7 @@
-import { Base } from "../generics/base.entity";
-import { Autor } from "../autores/autor.entity";
-import { Persona } from "../personas/persona.entity";
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne } from "typeorm";
+import { Persona } from './persona.entity';
+import { Column, Entity, ManyToMany, JoinTable, ManyToOne } from 'typeorm';
+import { Base } from '../../common/generics/base.entity';
+import { Autor } from "../../autores/entities/autor.entity";
 
 @Entity()
 export class Libro extends Base {
@@ -18,7 +18,7 @@ export class Libro extends Base {
     @Column()
     titulo: string;
 
-    @ManyToMany(type => Autor, { cascade: ["update", "insert"], eager: true })
+    @ManyToMany(type => Autor, { cascade: ["update", "insert"] })
     @JoinTable({
         name: "libro_autor",
         joinColumn: {
@@ -31,7 +31,6 @@ export class Libro extends Base {
         }
     })
     autores: Autor[];
-
 
     @ManyToOne(type => Persona, persona => persona.libros)
     persona: Persona;

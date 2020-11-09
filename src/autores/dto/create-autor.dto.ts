@@ -9,7 +9,7 @@ export class CreateAutorDto {
     @MinLength(2)
     @MaxLength(30)
     readonly apellido: string;
-
+    
     readonly biografia: string;
 
 }
